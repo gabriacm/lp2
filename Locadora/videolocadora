@@ -1,0 +1,79 @@
+create table filme
+(
+idfilme SERIAL PRIMARY KEY,
+titulo varchar(50),
+categoria varchar(20));
+
+
+create table fita
+(
+idfita serial PRIMARY KEY,
+filme integer references filme(idfilme));
+
+
+create table cliente
+(
+idcliente SERIAL PRIMARY KEY,
+nome varchar(20),
+sobrenome varchar (45),
+telefone integer,
+endereco varchar(45));
+
+
+create table emprestimo
+(
+idemprestimo serial PRIMARY KEY,
+cliente INTEGER REFERENCES cliente (idcliente),
+fita integer references fita (idfita));
+
+create table funcionario
+(idfuncionario serial primary key,
+nome varchar(40),
+telefone integer,
+CPF varchar(15),
+usuario varchar (10),
+senha varchar (10));
+
+-- inserts
+
+
+insert into cliente(nome,sobrenome,telefone,endereco)
+values ('Gabriel','Alexander',84234567,'rua egdar luiz schneider 130'),
+       ('Andrea','Da Silva',33203534,'rua joao manoel 330'),
+       ('Farah','Atbai',43442424,'rua duque de caxias 540'),
+       ('Vadi','sodansa',30453321,'av ipiranga 330');
+
+
+       insert into filme (titulo,categoria)
+       values ('Harry Potter e a Pedra Filosofal','ficçao'),
+       ('Harry Potter e o Prisioneiro de Azkaban','ficçao'),
+       ('Anjos e Demonios','Aventura'),
+       ('Um Crime de Mestre','Suspense');
+
+insert into funcionario (nome,telefone,CPF,usuario,senha)
+values ('Carlos Da Silva',86554123,'85612383654','kaka','lerolero'),
+       ('Leticia Silveira',91223754,'07865784568','leti','2131'),
+       ('Carla Dos Santos',84129087,'21067395432','carla','carla1'),
+       ('Bernardo Soares',81997668,'51028782311','bern','bernardo1');
+       
+       insert into fita (filme)
+       values(1),
+             (2),
+             (3),
+             (4);
+       
+
+       insert into emprestimo (cliente,fita)
+       values(1,1),
+             (2,2),
+             (3,3),
+             (4,2);
+
+
+select *from emprestimo;
+select *from funcionario;
+select *from filme;
+select *from cliente;
+select *from fita;
+select titulo,categoria from filme; 
+select cliente.nome ,titulo from cliente,filme,fita,emprestimo where emprestimo.cliente = cliente.idcliente and emprestimo.fita = fita.idfita and fita.filme = filme.idfilme;
