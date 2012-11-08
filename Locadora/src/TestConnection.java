@@ -10,17 +10,22 @@ public class TestConnection {
 
 	throws Exception {
 	    Connection con = DriverManager.getConnection(
-	                         "jdbc:postgresql: videolocadora",
-	                         "postgresql",
+	                         "jdbc:postgresql://localhost/videolocadora",
+	                         "postgres",
 	                         "senacrs");
 
 	    Statement stmt = con.createStatement();
-	    ResultSet rs = stmt.executeQuery("SELECT  FROM cliente");
+	    ResultSet rs = stmt.executeQuery("SELECT *FROM cliente where idcliente = 1");
 
 	    while (rs.next()) {
-	    	System.out.println("dados");
+	 
+	    	String s = rs.getString("nome");
 	        int x = rs.getInt("telefone");
-	        String s = rs.getString("nome");
+	      
+	        System.out.print("nome: ");
+	        System.out.println(s);
+	        System.out.print("fone: ");
+	        System.out.println(x);
 	    }
 }
 }    

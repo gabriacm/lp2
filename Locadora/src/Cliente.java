@@ -1,15 +1,18 @@
 
 public class Cliente {
 
+	private int id;
 	private String nome;
     private String sobrenome;
-    private String telefone;
+    private int telefone;
     private String endereco;
 	
     
     
-    public Cliente(String nome, String sobrenome, String telefone,String endereco) {
+    public Cliente(int id,String nome, String sobrenome, int telefone,String endereco) {
 		super();
+		
+		this.id = id;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.telefone = telefone;
@@ -17,6 +20,16 @@ public class Cliente {
 	}
 
 
+	public int getId() {
+		return id;
+	}
+
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 
 	public String getNome() {
 		return nome;
@@ -42,13 +55,13 @@ public class Cliente {
 
 
 
-	public String getTelefone() {
+	public int getTelefone() {
 		return telefone;
 	}
 
 
 
-	public void setTelefone(String telefone) {
+	public void setTelefone(int telefone) {
 		this.telefone = telefone;
 	}
 
@@ -65,6 +78,11 @@ public class Cliente {
 	}
     
     
+	public String toString() {
+		return String.format("Cliente [id = %s,nome=%s, sobrenome=%s, telefone=%s,endereco=%s]",
+				id,nome, sobrenome, telefone,endereco);
+	}
+	
     
 
 
