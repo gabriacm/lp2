@@ -1,19 +1,31 @@
 
 public class Filme {
-	
+
+	private int id;
 	private String titulo;
 	private String categoria;
 	private int duracao;
 	
 	
-	public Filme(String titulo, String categoria, int duracao) {
+	public Filme(int id,String titulo, String categoria,int duracao) {
 		super();
+		this.id=id;
 		this.titulo = titulo;
 		this.categoria = categoria;
 		this.duracao = duracao;
 	}
 
 
+
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
@@ -41,6 +53,14 @@ public class Filme {
 
 	public void setDuracao(int duracao) {
 		this.duracao = duracao;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Filme [id=" + id + ", titulo=" + titulo + ", categoria="
+				+ categoria + ", duracao=" + duracao + "]";
 	}
 
 	

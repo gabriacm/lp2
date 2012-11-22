@@ -15,7 +15,7 @@ public class TestConnection {
 	                         "senacrs");
 
 	    Statement stmt = con.createStatement();
-	    ResultSet rs = stmt.executeQuery("SELECT *FROM cliente where idcliente = 1");
+	    ResultSet rs = stmt.executeQuery("SELECT *FROM cliente where id = 1");
 
 	    while (rs.next()) {
 	 
