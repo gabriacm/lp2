@@ -13,20 +13,20 @@
 	import java.sql.Connection;
 	import java.sql.DriverManager;
 	import java.sql.PreparedStatement;
-	import java.sql.ResultSet;
+import java.sql.ResultSet;
 
 	public class FilmeDAO {
 
-		private static final String selectFindFilme = "select * from filme where titulo = ?";
+		private static final String selectFindFilme = "select * from filme where id = ?";
 		private static final String insertFilme = "insert into filme(titulo, categoria,duracao) values (?, ?, ?)";
-//		private static final String deleteFilme = "delete *from filme(titulo, categoria,duracao) values (?, ?, ?)";
+		private static final String deleteFilme = "delete *from filme where id = ?";
 //		private static final String updateFilme = "update into filme(titulo, categoria,duracao) values (?, ?, ?)";
 
 		// Configura essas variáveis de acordo com o seu banco
 
 
-		public Filme findFilme(String titulo) {
-			if (titulo == null) {
+		public Filme findFilme(int id) {
+			if (id == 0) {
 				throw new IllegalArgumentException("O titulo não pode ser null.");
 			}
 
@@ -39,14 +39,14 @@
 				
 				
 				PreparedStatement stmt = con.prepareStatement(selectFindFilme);
-				stmt.setString(1, titulo);
+				stmt.setInt(1, id);
 				ResultSet rs = stmt.executeQuery();
 				if (rs.next()) {
-			    	int id = rs.getInt("id");
-					String tituloo = rs.getString("titulo");
+			    	int id2 = rs.getInt("id");
+					String titulo = rs.getString("titulo");
 					String categoria = rs.getString("categoria");
 					int duracao = rs.getInt("duracao");
-					 f = new Filme(1, tituloo, categoria, duracao);
+					 f = new Filme(id2, titulo, categoria, duracao);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -76,6 +76,31 @@
 				int r = stmt.executeUpdate();
 				if (r != 1) {
 					throw new RuntimeException("Erro ao inserir operação");
+				}
+			} catch (Exception e) {
+				// FIXME: comunicar erro ao programa
+				e.printStackTrace();
+			}
+			// FIXME: fechar conexões
+		}
+		
+		public void deletar(Filme fil) {
+			if (fil == null) {
+				throw new IllegalArgumentException("O cliente não pode ser null!");
+			}
+			
+
+			try {
+				Connection con = DriverManager.getConnection(
+						"jdbc:postgresql://localhost/videolocadora", "postgres",
+						"senacrs");
+
+				PreparedStatement stmt = con.prepareStatement(deleteFilme);
+		
+				stmt.setInt(1, fil.getId());			
+				int r = stmt.executeUpdate();
+				if (r != 1) {
+					throw new RuntimeException("Erro ao deletar");
 				}
 			} catch (Exception e) {
 				// FIXME: comunicar erro ao programa

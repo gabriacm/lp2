@@ -13,20 +13,20 @@
 	import java.sql.Connection;
 	import java.sql.DriverManager;
 	import java.sql.PreparedStatement;
-	import java.sql.ResultSet;
+import java.sql.ResultSet;
 
 	public class FuncionarioDAO {
 
-		private static final String selectFindFuncionario = "select * from funcionario where nome = ?";
+		private static final String selectFindFuncionario = "select * from funcionario where id = ?";
 		private static final String insertFuncionario = "insert into funcionario(nome, telefone,cpf,usuario,senha) values (?, ?, ?, ?,?)";
-//		private static final String deleteFuncionario = "delete *from funcionario(nome, telefone,cpf,usuario,senha) values (?, ?, ?, ?,?)";
+    	private static final String deleteFuncionario = "delete *from funcionario where id = ?";
 //		private static final String updateFuncionario = "update into funcionario(nome, telefone,cpf,usuario,senha) values (?, ?, ?, ?,?)";
 
 		// Configura essas variáveis de acordo com o seu banco
 
 
-		public Funcionario findFuncionario(String nome) {
-			if (nome == null) {
+		public Funcionario findFuncionario(int id) {
+			if (id == 0) {
 				throw new IllegalArgumentException("O nome não pode ser null.");
 			}
 
@@ -39,16 +39,16 @@
 				
 				
 				PreparedStatement stmt = con.prepareStatement(selectFindFuncionario);
-				stmt.setString(1, nome);
+				stmt.setInt(1, id);
 				ResultSet rs = stmt.executeQuery();
 				if (rs.next()) {
-			    	int id = rs.getInt("id");
-					String nomee = rs.getString("nome");
+			    	int id2 = rs.getInt("id");
+					String nome = rs.getString("nome");
 					int telefone = rs.getInt("telefone");
 					String cpf = rs.getString("cpf");
 					String usuario= rs.getString("usuario");
 					String senha = rs.getString("senha");
-					 func = new Funcionario(1, nomee,telefone,cpf,usuario,senha);
+					 func = new Funcionario(id2, nome,telefone,cpf,usuario,senha);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -88,6 +88,34 @@
 			// FIXME: fechar conexões
 		}
 		
+		public void deletar(Funcionario d) {
+			if (d == null) {
+				throw new IllegalArgumentException("O cliente não pode ser null!");
+			}
+			
+
+			try {
+				Connection con = DriverManager.getConnection(
+						"jdbc:postgresql://localhost/videolocadora", "postgres",
+						"senacrs");
+
+				PreparedStatement stmt = con.prepareStatement(deleteFuncionario);
+		
+				stmt.setInt(1, d.getId());			
+				int r = stmt.executeUpdate();
+				if (r != 1) {
+					throw new RuntimeException("Erro ao deletar");
+				}
+			} catch (Exception e) {
+				// FIXME: comunicar erro ao programa
+				e.printStackTrace();
+			}
+			// FIXME: fechar conexões
+		}
+
+
+
+	
 
 	}
 

@@ -79,7 +79,7 @@ public class Cliente {
     
     
 	public String toString() {
-		return String.format("Cliente [id = %s,nome=%s, sobrenome=%s, telefone=%s,endereco=%s]",
+		return String.format("Cliente id = %s,nome=%s, sobrenome=%s, telefone=%s,endereco=%s",
 				id,nome, sobrenome, telefone,endereco);
 	}
 	
