@@ -20,7 +20,8 @@ import java.sql.ResultSet;
 		private static final String selectFindFilme = "select * from filme where id = ?";
 		private static final String insertFilme = "insert into filme(titulo, categoria,duracao) values (?, ?, ?)";
 		private static final String deleteFilme = "delete *from filme where id = ?";
-//		private static final String updateFilme = "update into filme(titulo, categoria,duracao) values (?, ?, ?)";
+		private static final String updateFilme = "update filme  set titulo = ?,categoria = ?, duracao = ? where id = ?";
+		
 
 		// Configura essas variáveis de acordo com o seu banco
 
@@ -109,6 +110,34 @@ import java.sql.ResultSet;
 			// FIXME: fechar conexões
 		}
 		
+		
+		public void editar(Filme fi) {
+			if (fi == null) {
+				throw new IllegalArgumentException("O cliente não pode ser null!");
+			}
+
+			try {
+				Connection con = DriverManager.getConnection(
+						"jdbc:postgresql://localhost/videolocadora", "postgres",
+						"senacrs");
+
+				PreparedStatement stmt = con.prepareStatement(updateFilme);
+				
+				stmt.setString(1, fi.getTitulo());
+				stmt.setString(2, fi.getCategoria());
+				stmt.setInt(3, fi.getDuracao());				
+				stmt.setInt(4, fi.getId());
+				int r = stmt.executeUpdate();
+				if (r != 1) {
+					throw new RuntimeException("Erro ao inserir operação");
+				}
+			} catch (Exception e) {
+				// FIXME: comunicar erro ao programa
+				e.printStackTrace();
+			}
+			// FIXME: fechar conexões
+
+		}
 
 	}
 

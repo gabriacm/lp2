@@ -28,7 +28,7 @@ public class LocadoraApp {
 	//		System.out.println(cd);
 	//		clienteDao.deletar(cd);
 //--------------------------------------------------------------
-	/*
+	
 		
 		// Select e insert delete de Filmes
 		FilmeDAO filme = new FilmeDAO();		
@@ -43,10 +43,22 @@ public class LocadoraApp {
 		filme.inserir(fl);
 		System.out.println(fl);
 		
+	
+	 
+				//update
+		FilmeDAO F = new FilmeDAO();
+		Filme aux = F.findFilme(1);
+		aux.setTitulo("Reliquias da morte");
+		F.editar(aux);
+		System.out.println(aux);
+	
+		
 		FilmeDAO filmeDao = new FilmeDAO();
 		Filme fi = filmeDao.findFilme(6);
 		System.out.println(fi);
 		filmeDao.deletar(fi);
+		
+		
 //---------------------------------------------------------------
 		
 		
@@ -69,7 +81,7 @@ public class LocadoraApp {
 		System.out.println(d);
 		funcionarioDao.deletar(d);
 				
-*/
+
 
 		
 		}
