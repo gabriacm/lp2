@@ -20,14 +20,13 @@ import java.sql.ResultSet;
 		private static final String selectFindFuncionario = "select * from funcionario where id = ?";
 		private static final String insertFuncionario = "insert into funcionario(nome, telefone,cpf,usuario,senha) values (?, ?, ?, ?,?)";
     	private static final String deleteFuncionario = "delete *from funcionario where id = ?";
-//		private static final String updateFuncionario = "update into funcionario(nome, telefone,cpf,usuario,senha) values (?, ?, ?, ?,?)";
-
-		// Configura essas variáveis de acordo com o seu banco
+    	private static final String updateFuncionario = "update funcionario  set nome = ?,telefone = ?, cpf = ?,usuario = ?,senha = ? where id = ?";
+		
 
 
 		public Funcionario findFuncionario(int id) {
 			if (id == 0) {
-				throw new IllegalArgumentException("O nome não pode ser null.");
+				throw new IllegalArgumentException("O nome não pode ser 0.");
 			}
 
 			Funcionario func = null;
@@ -113,9 +112,36 @@ import java.sql.ResultSet;
 			// FIXME: fechar conexões
 		}
 
+		public void editar(Funcionario ed) {
+			if (ed == null) {
+				throw new IllegalArgumentException("O cliente não pode ser null!");
+			}
 
+			try {
+				Connection con = DriverManager.getConnection(
+						"jdbc:postgresql://localhost/videolocadora", "postgres",
+						"senacrs");
 
-	
+				PreparedStatement stmt = con.prepareStatement(updateFuncionario);
+				
+				stmt.setString(1, ed.getNome());
+				stmt.setInt(2, ed.getTelefone());
+				stmt.setString(3, ed.getCpf());
+				stmt.setString(4, ed.getUsuario());
+				stmt.setString(5, ed.getSenha());
+				stmt.setInt(6, ed.getId());
+				int r = stmt.executeUpdate();
+				if (r != 1) {
+					throw new RuntimeException("Erro ao inserir operação");
+				}
+			} catch (Exception e) {
+				// FIXME: comunicar erro ao programa
+				e.printStackTrace();
+			}
+			// FIXME: fechar conexões
+
+		}
+
 
 	}
 
