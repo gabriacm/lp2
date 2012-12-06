@@ -33,14 +33,14 @@ import swing.JCadastrarPanel;
 			frame.getContentPane().add(principal);
 
 			JMenuBar menubar = new JMenuBar();	
-		    JMenu filme = new JMenu("Cadastrar filme");
-			menubar.add(filme);
+		    //JMenu filme = new JMenu("Cadastrar filme");
+			//menubar.add(filme);
 			
 			JMenu cliente = new JMenu("Cadastrar cliente");
 			menubar.add(cliente);
 		
-			JMenu emprestimo = new JMenu("Efetuar emprestimo");
-			menubar.add(emprestimo);
+			//JMenu emprestimo = new JMenu("Efetuar emprestimo");
+			//menubar.add(emprestimo);
 			
 			JMenu help = new JMenu("Sobre");
 			menubar.add(help);
@@ -48,20 +48,25 @@ import swing.JCadastrarPanel;
 			JMenu file = new JMenu("Sair");
 			menubar.add(file);
 			
+			
 //	sair
 			Action exitAction = new JSairMenuAction();
-			file.add(exitAction);
+			file.add(exitAction);			
+			
+// cadastrar			
+			Action cadastrarAction = new JCadastrarMenuAction(principal,cards);
+			cliente.add(cadastrarAction);
+
 // sobre
 			Action aboutAction = new JAboutMenuAction(frame);
 			help.add(aboutAction);
 			
-	    	Action cadastrarAction = new JCadastrarMenuAction(principal,cards);
-			cliente.add(cadastrarAction);
+	    	
 			
 			
 			frame.setJMenuBar(menubar);
 			
-			frame.setMinimumSize(new Dimension(500,300));
+			frame.setMinimumSize(new Dimension(400,200));
 
 			frame.pack();
 			frame.setVisible(true);	
