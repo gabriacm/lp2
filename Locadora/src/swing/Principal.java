@@ -6,8 +6,9 @@ package swing;
 import javax.swing.*;
 
 import swing.action.JAboutMenuAction;
+import swing.action.JCadastrarMenuAction;
 import swing.action.JSairMenuAction;
-
+import swing.JCadastrarPanel;
 
 
 	public class Principal {
@@ -16,12 +17,19 @@ import swing.action.JSairMenuAction;
 		private static void createAndShowGUI() {
 			JFrame frame = new JFrame("Videolocadora Gabrinus");
 			CardLayout cards = new CardLayout();
-			//TODO: utilizar card layout para combinar telas.
-			//http://docs.oracle.com/javase/tutorial/uiswing/layout/card.html
 			JPanel principal = new JPanel(cards);
-
 			
 			
+			JPanel cadastrar = new JCadastrarPanel(principal, cards);
+			JPanel vazio = new JPanel();
+			JLabel label = new JLabel("Videolocadora Gabrinus.");
+			vazio.add(label);
+			
+			principal.add(vazio, PRINCIPAL);
+			principal.add(cadastrar, JCadastrarMenuAction.CADASTRAR1);
+			
+			
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.getContentPane().add(principal);
 
 			JMenuBar menubar = new JMenuBar();	
@@ -47,13 +55,13 @@ import swing.action.JSairMenuAction;
 			Action aboutAction = new JAboutMenuAction(frame);
 			help.add(aboutAction);
 			
-			Action cadastrarAction = new JAboutMenuAction(frame);
-			help.add(cadastrarAction);
+	    	Action cadastrarAction = new JCadastrarMenuAction(principal,cards);
+			cliente.add(cadastrarAction);
 			
 			
 			frame.setJMenuBar(menubar);
 			
-			frame.setMinimumSize(new Dimension(400,200));
+			frame.setMinimumSize(new Dimension(500,300));
 
 			frame.pack();
 			frame.setVisible(true);	
@@ -69,4 +77,6 @@ import swing.action.JSairMenuAction;
 	}
 
 
+	
+	
 	

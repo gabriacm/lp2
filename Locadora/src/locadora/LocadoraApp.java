@@ -1,10 +1,11 @@
+package locadora;
 public class LocadoraApp {
 
 	public static void main(String[] args) {
         
 		// Select
 		ClienteDAO cliente = new ClienteDAO();		
-	/*	Cliente c = cliente.findCliente(2);
+		Cliente c = cliente.findCliente(2);
 		if (c == null) {
 			System.out.println("cliente não encontrado!");
 		} else {
@@ -21,7 +22,7 @@ public class LocadoraApp {
 		dsa.setNome("Felipe");
 		oi.editar(dsa);
 		System.out.println(dsa);
-		*/		
+		
 		//delete
 			
 			Cliente cd = cliente.findCliente(5);

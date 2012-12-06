@@ -1,3 +1,4 @@
+package locadora;
 
 
 
@@ -15,23 +16,21 @@
 	import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-	public class FilmeDAO {
+	public class FuncionarioDAO {
 
-		private static final String selectFindFilme = "select * from filme where id = ?";
-		private static final String insertFilme = "insert into filme(titulo, categoria,duracao) values (?, ?, ?)";
-		private static final String deleteFilme = "delete *from filme where id = ?";
-		private static final String updateFilme = "update filme  set titulo = ?,categoria = ?, duracao = ? where id = ?";
+		private static final String selectFindFuncionario = "select * from funcionario where id = ?";
+		private static final String insertFuncionario = "insert into funcionario(nome, telefone,cpf,usuario,senha) values (?, ?, ?, ?,?)";
+    	private static final String deleteFuncionario = "delete *from funcionario where id = ?";
+    	private static final String updateFuncionario = "update funcionario  set nome = ?,telefone = ?, cpf = ?,usuario = ?,senha = ? where id = ?";
 		
 
-		// Configura essas variáveis de acordo com o seu banco
 
-
-		public Filme findFilme(int id) {
+		public Funcionario findFuncionario(int id) {
 			if (id == 0) {
-				throw new IllegalArgumentException("O titulo não pode ser null.");
+				throw new IllegalArgumentException("O nome não pode ser 0.");
 			}
 
-			Filme f = null;
+			Funcionario func = null;
 
 			try {
 				Connection con = DriverManager.getConnection(
@@ -39,15 +38,17 @@ import java.sql.ResultSet;
 						"senacrs");
 				
 				
-				PreparedStatement stmt = con.prepareStatement(selectFindFilme);
+				PreparedStatement stmt = con.prepareStatement(selectFindFuncionario);
 				stmt.setInt(1, id);
 				ResultSet rs = stmt.executeQuery();
 				if (rs.next()) {
 			    	int id2 = rs.getInt("id");
-					String titulo = rs.getString("titulo");
-					String categoria = rs.getString("categoria");
-					int duracao = rs.getInt("duracao");
-					 f = new Filme(id2, titulo, categoria, duracao);
+					String nome = rs.getString("nome");
+					int telefone = rs.getInt("telefone");
+					String cpf = rs.getString("cpf");
+					String usuario= rs.getString("usuario");
+					String senha = rs.getString("senha");
+					 func = new Funcionario(id2, nome,telefone,cpf,usuario,senha);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -55,12 +56,12 @@ import java.sql.ResultSet;
 			}
 			// FIXME: fechar conexões
 
-			return f;
+			return func;
 			
 		}
 		
-		public void inserir(Filme fl) {
-			if (fl == null) {
+		public void inserir(Funcionario fu) {
+			if (fu == null) {
 				throw new IllegalArgumentException("O cliente não pode ser null!");
 			}
 			
@@ -70,10 +71,12 @@ import java.sql.ResultSet;
 						"jdbc:postgresql://localhost/videolocadora", "postgres",
 						"senacrs");
 
-				PreparedStatement stmt = con.prepareStatement(insertFilme);
-				stmt.setString(1, fl.getTitulo());
-				stmt.setString(2, fl.getCategoria());
-				stmt.setInt(3, fl.getDuracao());
+				PreparedStatement stmt = con.prepareStatement(insertFuncionario);
+				stmt.setString(1, fu.getNome());
+				stmt.setInt(2, fu.getTelefone());
+				stmt.setString(3, fu.getCpf());
+				stmt.setString(4, fu.getUsuario());
+				stmt.setString(5, fu.getSenha());
 				int r = stmt.executeUpdate();
 				if (r != 1) {
 					throw new RuntimeException("Erro ao inserir operação");
@@ -85,8 +88,8 @@ import java.sql.ResultSet;
 			// FIXME: fechar conexões
 		}
 		
-		public void deletar(Filme fil) {
-			if (fil == null) {
+		public void deletar(Funcionario d) {
+			if (d == null) {
 				throw new IllegalArgumentException("O cliente não pode ser null!");
 			}
 			
@@ -96,9 +99,9 @@ import java.sql.ResultSet;
 						"jdbc:postgresql://localhost/videolocadora", "postgres",
 						"senacrs");
 
-				PreparedStatement stmt = con.prepareStatement(deleteFilme);
+				PreparedStatement stmt = con.prepareStatement(deleteFuncionario);
 		
-				stmt.setInt(1, fil.getId());			
+				stmt.setInt(1, d.getId());			
 				int r = stmt.executeUpdate();
 				if (r != 1) {
 					throw new RuntimeException("Erro ao deletar");
@@ -109,10 +112,9 @@ import java.sql.ResultSet;
 			}
 			// FIXME: fechar conexões
 		}
-		
-		
-		public void editar(Filme fi) {
-			if (fi == null) {
+
+		public void editar(Funcionario ed) {
+			if (ed == null) {
 				throw new IllegalArgumentException("O cliente não pode ser null!");
 			}
 
@@ -121,12 +123,14 @@ import java.sql.ResultSet;
 						"jdbc:postgresql://localhost/videolocadora", "postgres",
 						"senacrs");
 
-				PreparedStatement stmt = con.prepareStatement(updateFilme);
+				PreparedStatement stmt = con.prepareStatement(updateFuncionario);
 				
-				stmt.setString(1, fi.getTitulo());
-				stmt.setString(2, fi.getCategoria());
-				stmt.setInt(3, fi.getDuracao());				
-				stmt.setInt(4, fi.getId());
+				stmt.setString(1, ed.getNome());
+				stmt.setInt(2, ed.getTelefone());
+				stmt.setString(3, ed.getCpf());
+				stmt.setString(4, ed.getUsuario());
+				stmt.setString(5, ed.getSenha());
+				stmt.setInt(6, ed.getId());
 				int r = stmt.executeUpdate();
 				if (r != 1) {
 					throw new RuntimeException("Erro ao inserir operação");
@@ -139,7 +143,6 @@ import java.sql.ResultSet;
 
 		}
 
-	}
 
-	
+	}
 
