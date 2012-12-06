@@ -7,6 +7,7 @@ import javax.swing.*;
 
 import swing.action.JAboutMenuAction;
 import swing.action.JCadastrarMenuAction;
+import swing.action.JConsultarClienteMenuAction;
 import swing.action.JSairMenuAction;
 import swing.JCadastrarPanel;
 
@@ -19,7 +20,7 @@ import swing.JCadastrarPanel;
 			CardLayout cards = new CardLayout();
 			JPanel principal = new JPanel(cards);
 			
-			
+			JPanel consultarCliente = new JConsultarClientePanel(principal, cards);
 			JPanel cadastrar = new JCadastrarPanel(principal, cards);
 			JPanel vazio = new JPanel();
 			JLabel label = new JLabel("Videolocadora Gabrinus.");
@@ -27,7 +28,7 @@ import swing.JCadastrarPanel;
 			
 			principal.add(vazio, PRINCIPAL);
 			principal.add(cadastrar, JCadastrarMenuAction.CADASTRAR1);
-			
+			principal.add(consultarCliente, JConsultarClienteMenuAction.CONSULTAR1);
 			
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.getContentPane().add(principal);
@@ -56,6 +57,10 @@ import swing.JCadastrarPanel;
 // cadastrar			
 			Action cadastrarAction = new JCadastrarMenuAction(principal,cards);
 			cliente.add(cadastrarAction);
+			
+			Action consultarAction = new JConsultarClienteMenuAction(principal,cards);
+			cliente.add(consultarAction);
+			
 
 // sobre
 			Action aboutAction = new JAboutMenuAction(frame);
