@@ -41,6 +41,9 @@ package swing;
 			super.setVisible(aFlag);
 			System.out.printf("JCadastrarFilmePanel::setVisible %b\n", aFlag);
 			titulo.setText("");
+			categoria.setText("");
+			duracao.setText("");
+			
 		}
 
 		public JCadastrarFilmePanel() {

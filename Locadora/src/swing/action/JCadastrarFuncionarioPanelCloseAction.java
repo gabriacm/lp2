@@ -6,23 +6,28 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 
-	@SuppressWarnings("serial")
-	public class JCadastrarMenuAction  extends AbstractAction {
-		public static final String CADASTRAR1 = "CADASTRAR1";
+import swing.Principal;
 
+
+
+	
+	@SuppressWarnings("serial")
+	public class JCadastrarFuncionarioPanelCloseAction extends AbstractAction {
 		private JPanel principal;
 		private CardLayout cards;
-		
-		public JCadastrarMenuAction(JPanel principal, CardLayout cards) {
-			super("Inserir Clientes");
+
+		public JCadastrarFuncionarioPanelCloseAction(JPanel principal, CardLayout cards) {
+			super("Fechar");
 			this.principal = principal;
 			this.cards = cards;
 		}
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			cards.show(principal, CADASTRAR1);
+			if (principal != null) {
+				cards.show(principal, Principal.PRINCIPAL);
+			}
+
 		}
 	}
 	
-
-

@@ -44,6 +44,9 @@ public class JCadastrarPanel extends JPanel {
 		super.setVisible(aFlag);
 		System.out.printf("JCadastrarPanel::setVisible %b\n", aFlag);
 		nome.setText("");
+		sobrenome.setText("");
+		telefone.setText("");
+		endereco.setText("");
 	}
 
 	public JCadastrarPanel() {

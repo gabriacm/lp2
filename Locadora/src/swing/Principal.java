@@ -8,9 +8,11 @@ import javax.swing.*;
 
 import swing.action.JAboutMenuAction;
 import swing.action.JCadastrarFilmeMenuAction;
+import swing.action.JCadastrarFuncionarioMenuAction;
 import swing.action.JCadastrarMenuAction;
 import swing.action.JConsultarClienteMenuAction;
 import swing.action.JConsultarFilmeMenuAction;
+import swing.action.JConsultarFuncionarioMenuAction;
 import swing.action.JSairMenuAction;
 import swing.JCadastrarPanel;
 
@@ -29,6 +31,9 @@ import swing.JCadastrarPanel;
 			JPanel cadastrarFilme = new JCadastrarFilmePanel(principal, cards);
 			JPanel consultarFilme = new JConsultarFilmePanel(principal, cards);
 			
+			JPanel cadastrarFuncionario = new JCadastrarFuncionarioPanel(principal, cards);
+			JPanel consultarFuncionario = new JConsultarFuncionarioPanel(principal, cards);
+			
 			JPanel vazio = new JPanel();
 			JLabel label = new JLabel("Videolocadora Gabrinus.");
 			vazio.add(label);
@@ -39,6 +44,9 @@ import swing.JCadastrarPanel;
 			
 			principal.add(cadastrarFilme, JCadastrarFilmeMenuAction.CADASTRAR2);
 			principal.add(consultarFilme, JConsultarFilmeMenuAction.CONSULTAR2);
+			
+			principal.add(cadastrarFuncionario, JCadastrarFuncionarioMenuAction.CADASTRAR3);
+			principal.add(consultarFuncionario, JConsultarFuncionarioMenuAction.CONSULTAR3);
 			
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.getContentPane().add(principal);
@@ -53,6 +61,9 @@ import swing.JCadastrarPanel;
 		
 			//JMenu deletar = new JMenu("Deletar cliente");
 			//menubar.add(deletar);
+			
+			JMenu funcionario = new JMenu("Cadastrar funcionario");
+			menubar.add(funcionario);
 			
 			JMenu help = new JMenu("Sobre");
 			menubar.add(help);
@@ -76,13 +87,26 @@ import swing.JCadastrarPanel;
 			Action consultarAction = new JConsultarClienteMenuAction(principal,cards);
 			cliente.add(consultarAction);
 			
+			
+// cadastrar funcionario
+			
+			   Action cadastrarFuncionarioAction = new JCadastrarFuncionarioMenuAction(principal,cards);
+				funcionario.add(cadastrarFuncionarioAction);
+				
+				Action consultarFuncionarioAction = new JConsultarFuncionarioMenuAction(principal,cards);
+				funcionario.add(consultarFuncionarioAction);
+				
+			
 // cadastrar filme	
 			
+				
+			Action cadastrarFilmeAction = new JCadastrarFilmeMenuAction(principal,cards);
+			filme.add(cadastrarFilmeAction);
+				
 			Action consultarFilmeAction = new JConsultarFilmeMenuAction(principal,cards);
 			filme.add(consultarFilmeAction);
 			
-			Action cadastrarFilmeAction = new JCadastrarFilmeMenuAction(principal,cards);
-			filme.add(cadastrarFilmeAction);
+		
 			
 			
 

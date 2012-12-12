@@ -42,7 +42,7 @@ public class JConsultarFilmePanel extends JPanel{
 		List<Filme> fi = filme.consultarFilme();
 
 	
-			String s = "Titulo \t\t Categoria \t\t Duracao\n\n";
+			String s = "Titulo \t\t\t Categoria \t\t Duracao\n\n";
 		
 			for (Filme consultar : fi) {
 			

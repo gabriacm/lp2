@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 		private CardLayout cards;
 		
 		public JCadastrarFilmeMenuAction(JPanel principal, CardLayout cards) {
-			super("Cadastrar");
+			super("Inserir Filmes");
 			this.principal = principal;
 			this.cards = cards;
 		}

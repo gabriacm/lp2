@@ -6,6 +6,8 @@ package locadora;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
 	import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 	import java.util.Vector;
 	import javax.swing.JOptionPane;
 
@@ -22,7 +24,7 @@ import java.sql.ResultSet;
 		private static final String insertFuncionario = "insert into funcionario(nome, telefone,cpf,usuario,senha) values (?, ?, ?, ?,?)";
     	private static final String deleteFuncionario = "delete from funcionario where id = ?";
     	private static final String updateFuncionario = "update funcionario  set nome = ?,telefone = ?, cpf = ?,usuario = ?,senha = ? where id = ?";
-		
+    	private static final String selectFuncionario = "select * from funcionario";
 
 
 		public Funcionario findFuncionario(int id) {
@@ -144,5 +146,53 @@ import java.sql.ResultSet;
 		}
 
 
+		public List<Funcionario> consultarFuncionario() {
+			
+			List<Funcionario> ops = new ArrayList<Funcionario>();
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			Connection con = null;
+			try {
+				con = DriverManager.getConnection(
+						"jdbc:postgresql://localhost/videolocadora", "postgres",
+						"senacrs");
+
+				stmt = con.prepareStatement(selectFuncionario);
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String nome  = rs.getString("nome");
+					int telefone = rs.getInt("telefone");
+					String cpf  = rs.getString("cpf");
+					String usuario  = rs.getString("usuario");
+					String senha  = rs.getString("senha");
+					
+					
+					
+					Funcionario op = new Funcionario(id, nome,telefone,cpf,usuario,senha);
+					ops.add(op);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				// FIXME: comunicar erro ao programa cliente
+			} finally {
+				try {
+					if (stmt != null) {
+						stmt.close();
+					}
+					if (rs != null) {
+						stmt.close();
+					}
+					if (con != null) {
+						stmt.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					// FIXME: comunicar erro ao programa cliente
+				}
+			}
+			return ops;
+		}
+		
 	}
 

@@ -64,7 +64,7 @@ public class LocadoraApp {
 		
 				
 		// Select,insert,update,delete funcionario
-	//	FuncionarioDAO funcionario = new FuncionarioDAO();		
+		FuncionarioDAO funcionario = new FuncionarioDAO();		
 	//			Funcionario func = funcionario.findFuncionario(1);
 	//	if (func == null) {
 	//		System.out.println("Funcionario não encontrado!");
@@ -78,9 +78,9 @@ public class LocadoraApp {
 		
 		
 		
-		//Funcionario d = funcionario.findFuncionario(6);
-		//System.out.println(d);
-		//funcionario.deletar(d);
+		Funcionario d = funcionario.findFuncionario(1);
+		System.out.println(d);
+		funcionario.deletar(d);
 			
 		
 		

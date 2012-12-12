@@ -7,22 +7,19 @@ import javax.swing.AbstractAction;
 import javax.swing.JPanel;
 
 	@SuppressWarnings("serial")
-	public class JCadastrarMenuAction  extends AbstractAction {
-		public static final String CADASTRAR1 = "CADASTRAR1";
+	public class JConsultarFuncionarioMenuAction  extends AbstractAction {
+		public static final String CONSULTAR3 = "CONSULTAR3";
 
 		private JPanel principal;
 		private CardLayout cards;
 		
-		public JCadastrarMenuAction(JPanel principal, CardLayout cards) {
-			super("Inserir Clientes");
+		public JConsultarFuncionarioMenuAction(JPanel principal, CardLayout cards) {
+			super("Consultar Funcionario");
 			this.principal = principal;
-			this.cards = cards;
+			this.cards = cards;		
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			cards.show(principal, CADASTRAR1);
+			cards.show(principal, CONSULTAR3);
 		}
 	}
-	
-
-
