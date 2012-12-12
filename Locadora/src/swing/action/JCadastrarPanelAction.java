@@ -52,6 +52,10 @@ import locadora.Cliente;
 					cliente.inserir(cli);
 					
 			
+
+					JOptionPane.showMessageDialog(null,
+							"Cliente Cadastrado com Sucesso", "Aviso",
+							JOptionPane.INFORMATION_MESSAGE);
 			
 		
 			if (principal != null) {

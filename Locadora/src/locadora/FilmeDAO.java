@@ -6,6 +6,8 @@ package locadora;
 	import java.sql.ResultSet;
 	import java.sql.SQLException;
 	import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 	import java.util.Vector;
 	import javax.swing.JOptionPane;
 
@@ -18,11 +20,12 @@ import java.sql.ResultSet;
 
 	public class FilmeDAO {
 
+		
 		private static final String selectFindFilme = "select * from filme where id = ?";
 		private static final String insertFilme = "insert into filme(titulo, categoria,duracao) values (?, ?, ?)";
-		private static final String deleteFilme = "delete *from filme where id = ?";
+		private static final String deleteFilme = "delete  from filme where id = ?";
 		private static final String updateFilme = "update filme  set titulo = ?,categoria = ?, duracao = ? where id = ?";
-		
+		private static final String selectFilme = "select * from filme";
 
 		// Configura essas variáveis de acordo com o seu banco
 
@@ -88,7 +91,7 @@ import java.sql.ResultSet;
 		
 		public void deletar(Filme fil) {
 			if (fil == null) {
-				throw new IllegalArgumentException("O cliente não pode ser null!");
+				throw new IllegalArgumentException("O filme não pode ser null!");
 			}
 			
 
@@ -114,7 +117,7 @@ import java.sql.ResultSet;
 		
 		public void editar(Filme fi) {
 			if (fi == null) {
-				throw new IllegalArgumentException("O cliente não pode ser null!");
+				throw new IllegalArgumentException("O filme não pode ser null!");
 			}
 
 			try {
@@ -140,6 +143,52 @@ import java.sql.ResultSet;
 
 		}
 
+		
+
+		public List<Filme> consultarFilme() {
+		
+			List<Filme> ops = new ArrayList<Filme>();
+			PreparedStatement stmt = null;
+			ResultSet rs = null;
+			Connection con = null;
+			try {
+				con = DriverManager.getConnection(
+						"jdbc:postgresql://localhost/videolocadora", "postgres",
+						"senacrs");
+
+				stmt = con.prepareStatement(selectFilme);
+				rs = stmt.executeQuery();
+				while (rs.next()) {
+					int id = rs.getInt("id");
+					String titulo  = rs.getString("titulo");
+					String categoria  = rs.getString("categoria");
+					int duracao = rs.getInt("duracao");
+					
+					Filme op = new Filme(id, titulo,categoria,duracao);
+					ops.add(op);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				// FIXME: comunicar erro ao programa cliente
+			} finally {
+				try {
+					if (stmt != null) {
+						stmt.close();
+					}
+					if (rs != null) {
+						stmt.close();
+					}
+					if (con != null) {
+						stmt.close();
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					// FIXME: comunicar erro ao programa cliente
+				}
+			}
+			return ops;
+		}
+		
 	}
 
 	

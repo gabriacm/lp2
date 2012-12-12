@@ -5,29 +5,29 @@ public class LocadoraApp {
         
 		// Select
 		ClienteDAO cliente = new ClienteDAO();		
-		Cliente c = cliente.findCliente(2);
-		if (c == null) {
-			System.out.println("cliente não encontrado!");
-		} else {
-			System.out.println(c);}
+	//	Cliente c = cliente.findCliente(2);
+	//	if (c == null) {
+		//	System.out.println("cliente não encontrado!");
+		//} else {
+		//	System.out.println(c);}
 
 			//insert
-		Cliente asd = new Cliente(1, "Geraldo", "Padilha", 43602233,"rua andarai");
-		cliente.inserir(asd);
-		System.out.println(asd);
+	//	Cliente asd = new Cliente(1, "Geraldo", "Padilha", 43602233,"rua andarai");
+	//	cliente.inserir(asd);
+	//	System.out.println(asd);
 		
 		//update
-		ClienteDAO oi = new ClienteDAO();
-		Cliente dsa = oi.findCliente(1);
-		dsa.setNome("Felipe");
-		oi.editar(dsa);
-		System.out.println(dsa);
+//		ClienteDAO oi = new ClienteDAO();
+//		Cliente dsa = oi.findCliente(1);
+//		dsa.setNome("Felipe");
+//		oi.editar(dsa);
+//		System.out.println(dsa);
 		
 		//delete
 			
-			Cliente cd = cliente.findCliente(5);
-			System.out.println(cd);
-			cliente.deletar(cd);
+//	Cliente cd = cliente.findCliente(1);
+//			System.out.println(cd);
+//			cliente.deletar(cd);
 //--------------------------------------------------------------
 	
 		
@@ -55,7 +55,7 @@ public class LocadoraApp {
 	
 		
 	//	FilmeDAO filmeDao = new FilmeDAO();
-	//	Filme fi = filmeDao.findFilme(6);
+	//	Filme fi = filmeDao.findFilme(1);
 	//	System.out.println(fi);
 	//	filmeDao.deletar(fi);
 		

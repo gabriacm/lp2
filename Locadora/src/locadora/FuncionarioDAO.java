@@ -20,7 +20,7 @@ import java.sql.ResultSet;
 
 		private static final String selectFindFuncionario = "select * from funcionario where id = ?";
 		private static final String insertFuncionario = "insert into funcionario(nome, telefone,cpf,usuario,senha) values (?, ?, ?, ?,?)";
-    	private static final String deleteFuncionario = "delete *from funcionario where id = ?";
+    	private static final String deleteFuncionario = "delete from funcionario where id = ?";
     	private static final String updateFuncionario = "update funcionario  set nome = ?,telefone = ?, cpf = ?,usuario = ?,senha = ? where id = ?";
 		
 
