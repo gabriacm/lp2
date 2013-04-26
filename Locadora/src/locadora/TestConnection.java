@@ -13,10 +13,10 @@ public class TestConnection {
 	    Connection con = DriverManager.getConnection(
 	                         "jdbc:postgresql://localhost/videolocadora",
 	                         "postgres",
-	                         "senacrs");
+	                         "gabriel");
 
 	    Statement stmt = con.createStatement();
-	    ResultSet rs = stmt.executeQuery("SELECT *FROM cliente where id = 1");
+	    ResultSet rs = stmt.executeQuery("SELECT *FROM cliente where id = 1 ");
 
 	    while (rs.next()) {
 	 

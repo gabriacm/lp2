@@ -37,7 +37,7 @@ import java.sql.ResultSet;
 			try {
 				Connection con = DriverManager.getConnection(
 						"jdbc:postgresql://localhost/videolocadora", "postgres",
-						"senacrs");
+						"gabriel");
 				
 				
 				PreparedStatement stmt = con.prepareStatement(selectFindFuncionario);

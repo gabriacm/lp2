@@ -31,7 +31,7 @@ public class ClienteDAO {
 		try {
 			Connection con = DriverManager.getConnection(
 					"jdbc:postgresql://localhost/videolocadora", "postgres",
-					"senacrs");
+					"gabriel");
 
 			PreparedStatement stmt = con.prepareStatement(selectFindCliente);
 			stmt.setInt(1, id);
